@@ -1,6 +1,7 @@
 package com.usfzy.criminalintent.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
                 Toast.makeText(binding.root.context, "${crime.title} Clicked!", Toast.LENGTH_SHORT)
                     .show()
             }
+
+            imageView.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
         }
     }
 }
