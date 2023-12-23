@@ -3,7 +3,6 @@ package com.usfzy.criminalintent.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.usfzy.criminalintent.databinding.ListItemCrimeBinding
 import com.usfzy.criminalintent.model.Crime
@@ -11,14 +10,13 @@ import com.usfzy.criminalintent.model.Crime
 class CrimeHolder(private val binding: ListItemCrimeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(crime: Crime) {
+    fun bind(crime: Crime, onCrimeClicked: () -> Unit) {
         binding.apply {
             crimeTitle.text = crime.title
             crimeDate.text = crime.date.toString()
 
             root.setOnClickListener {
-                Toast.makeText(binding.root.context, "${crime.title} Clicked!", Toast.LENGTH_SHORT)
-                    .show()
+                onCrimeClicked()
             }
 
             imageView.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
@@ -26,7 +24,11 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
     }
 }
 
-class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<CrimeHolder>() {
+class CrimeListAdapter(
+    private val crimes: List<Crime>,
+    private val onCrimeClicked: () -> Unit
+) :
+    RecyclerView.Adapter<CrimeHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -40,7 +42,7 @@ class CrimeListAdapter(private val crimes: List<Crime>) : RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-        holder.bind(crimes[position])
+        holder.bind(crimes[position], onCrimeClicked)
     }
 
 }

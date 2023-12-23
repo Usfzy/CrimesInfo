@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Date
+import java.util.UUID
 
 class CrimeListViewModel : ViewModel() {
 
@@ -28,4 +30,18 @@ class CrimeListViewModel : ViewModel() {
             }
         }
     }
+    private suspend fun insertCrimes() {
+        for (i in 0 until 100) {
+            val crime = Crime(
+                id = UUID.randomUUID(),
+                title = "Crime #$i",
+                date = Date(),
+                isSolved = i % 2 == 0,
+                requiresPolice = i % 2 == 0,
+            )
+            crimeRepository.insertCrime(crime)
+        }
+    }
 }
+
+
