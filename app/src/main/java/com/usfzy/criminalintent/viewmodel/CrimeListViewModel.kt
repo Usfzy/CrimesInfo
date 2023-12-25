@@ -30,6 +30,7 @@ class CrimeListViewModel : ViewModel() {
             }
         }
     }
+
     private suspend fun insertCrimes() {
         for (i in 0 until 100) {
             val crime = Crime(

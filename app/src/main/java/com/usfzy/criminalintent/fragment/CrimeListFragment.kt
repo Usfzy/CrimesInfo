@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.usfzy.criminalintent.R
 import com.usfzy.criminalintent.adapter.CrimeListAdapter
 import com.usfzy.criminalintent.databinding.FragmentCrimeListBinding
 import com.usfzy.criminalintent.viewmodel.CrimeListViewModel
@@ -31,13 +30,13 @@ class CrimeListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentCrimeListBinding.inflate(inflater, container, false)
 
         binding.crimeRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        return binding.root
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,8 +45,10 @@ class CrimeListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 crimeListViewModel.crimes.collect { crimes ->
-                    binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes) {
-                        findNavController().navigate(R.id.show_crime_detail)
+                    binding.crimeRecyclerView.adapter = CrimeListAdapter(crimes) { crimeId ->
+                        findNavController().navigate(
+                            CrimeListFragmentDirections.showCrimeDetail(crimeId)
+                        )
                     }
                 }
             }

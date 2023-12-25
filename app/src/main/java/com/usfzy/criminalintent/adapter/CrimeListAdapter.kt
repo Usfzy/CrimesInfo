@@ -6,17 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.usfzy.criminalintent.databinding.ListItemCrimeBinding
 import com.usfzy.criminalintent.model.Crime
+import java.util.UUID
 
 class CrimeHolder(private val binding: ListItemCrimeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(crime: Crime, onCrimeClicked: () -> Unit) {
+    fun bind(crime: Crime, onCrimeClicked: (crimeId: UUID) -> Unit) {
         binding.apply {
             crimeTitle.text = crime.title
             crimeDate.text = crime.date.toString()
 
             root.setOnClickListener {
-                onCrimeClicked()
+                onCrimeClicked(crime.id)
             }
 
             imageView.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
@@ -26,7 +27,7 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
 
 class CrimeListAdapter(
     private val crimes: List<Crime>,
-    private val onCrimeClicked: () -> Unit
+    private val onCrimeClicked: (crimeId: UUID) -> Unit
 ) :
     RecyclerView.Adapter<CrimeHolder>() {
 

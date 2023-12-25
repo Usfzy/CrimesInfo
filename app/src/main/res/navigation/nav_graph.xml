@@ -17,6 +17,10 @@
     <fragment
         android:id="@+id/crimeDetailsFragment"
         android:name="com.usfzy.criminalintent.fragment.CrimeDetailsFragment"
-        android:label="fragment_crime_details"
-        tools:layout="@layout/fragment_crime_details" />
+        android:label="CrimeDetailsFragment"
+        tools:layout="@layout/fragment_crime_details">
+        <argument
+            android:name="crimeId"
+            app:argType="java.util.UUID" />
+    </fragment>
 </navigation>
