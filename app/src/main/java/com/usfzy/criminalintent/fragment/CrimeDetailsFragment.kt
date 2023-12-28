@@ -18,7 +18,7 @@ import com.usfzy.criminalintent.model.Crime
 import com.usfzy.criminalintent.viewmodel.CrimeDetailsViewModel
 import com.usfzy.criminalintent.viewmodel.CrimeDetailsViewModelFactory
 import kotlinx.coroutines.launch
-import java.sql.Time
+import java.util.Date
 
 class CrimeDetailsFragment : Fragment() {
 
@@ -64,10 +64,9 @@ class CrimeDetailsFragment : Fragment() {
         }
 
         setFragmentResultListener(DatePickerFragment.REQUEST_KEY_DATE) { _, bundle ->
-            val date = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Time
+            val date = bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
             crimeDetailsViewModel.updateCrime { it.copy(date = date) }
         }
-
         return binding.root
     }
 

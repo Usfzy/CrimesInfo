@@ -1,6 +1,7 @@
 package com.usfzy.criminalintent.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -21,6 +22,9 @@ interface CrimeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCrime(crime: Crime)
 
+    @Delete
+    suspend fun deleteCrime(crime: Crime)
+
     @Update()
-    suspend fun updateCrime(crime:Crime)
+    suspend fun updateCrime(crime: Crime)
 }

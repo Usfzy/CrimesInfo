@@ -23,7 +23,6 @@ class CrimeRepository private constructor(
             CrimeDatabase::class.java,
             DATABASE_NAME
         )
-//        .createFromAsset(DATABASE_NAME)
         .build()
 
     fun getCrimes(): Flow<List<Crime>> = database.crimeDao().getCrimes()
@@ -31,6 +30,11 @@ class CrimeRepository private constructor(
 
     suspend fun insertCrime(crime: Crime) {
         database.crimeDao().insertCrime(crime)
+    }
+
+    suspend fun deleteCrime(crime: Crime)
+    {
+        database.crimeDao().deleteCrime(crime)
     }
 
     fun updateCrime(crime: Crime) {

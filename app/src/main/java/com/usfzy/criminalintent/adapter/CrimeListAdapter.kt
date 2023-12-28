@@ -11,13 +11,21 @@ import java.util.UUID
 class CrimeHolder(private val binding: ListItemCrimeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(crime: Crime, onCrimeClicked: (crimeId: UUID) -> Unit) {
+    fun bind(
+        crime: Crime,
+        onCrimeClicked: (crimeId: UUID) -> Unit,
+        onDeleteCrimeClicked: (crime: Crime) -> Unit
+    ) {
         binding.apply {
             crimeTitle.text = crime.title
             crimeDate.text = crime.date.toString()
 
             root.setOnClickListener {
                 onCrimeClicked(crime.id)
+            }
+
+            deleteCrime.setOnClickListener {
+                onDeleteCrimeClicked(crime)
             }
 
             imageView.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
@@ -27,7 +35,8 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
 
 class CrimeListAdapter(
     private val crimes: List<Crime>,
-    private val onCrimeClicked: (crimeId: UUID) -> Unit
+    private val onCrimeClicked: (crimeId: UUID) -> Unit,
+    private val onDeleteCrimeClicked: (crime: Crime) -> Unit,
 ) :
     RecyclerView.Adapter<CrimeHolder>() {
 
@@ -43,7 +52,7 @@ class CrimeListAdapter(
     }
 
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-        holder.bind(crimes[position], onCrimeClicked)
+        holder.bind(crimes[position], onCrimeClicked, onDeleteCrimeClicked)
     }
 
 }
