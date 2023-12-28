@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.UUID
 
-class CrimeListFragment : Fragment() {
+class CrimeListFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentCrimeListBinding? = null
     private val binding
@@ -50,26 +50,7 @@ class CrimeListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (requireActivity() as MenuHost).addMenuProvider(
-            object : MenuProvider {
-
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.fragment_crime_list, menu)
-                }
-
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    return when (menuItem.itemId) {
-                        R.id.new_crime -> {
-                            showNewCrime()
-                            true
-                        }
-
-                        else -> false
-                    }
-                }
-
-
-            },
-            viewLifecycleOwner,
+            this, viewLifecycleOwner,
         )
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -110,6 +91,21 @@ class CrimeListFragment : Fragment() {
         }
 
     }
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.fragment_crime_list, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.new_crime -> {
+                showNewCrime()
+                true
+            }
+
+            else -> false
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
