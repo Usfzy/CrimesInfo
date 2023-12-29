@@ -3,6 +3,7 @@ package com.usfzy.criminalintent.repository
 import android.content.Context
 import androidx.room.Room
 import com.usfzy.criminalintent.database.CrimeDatabase
+import com.usfzy.criminalintent.database.migration_1_2
 import com.usfzy.criminalintent.model.Crime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +24,7 @@ class CrimeRepository private constructor(
             CrimeDatabase::class.java,
             DATABASE_NAME
         )
+        .addMigrations(migration_1_2)
         .build()
 
     fun getCrimes(): Flow<List<Crime>> = database.crimeDao().getCrimes()
@@ -32,8 +34,7 @@ class CrimeRepository private constructor(
         database.crimeDao().insertCrime(crime)
     }
 
-    suspend fun deleteCrime(crime: Crime)
-    {
+    suspend fun deleteCrime(crime: Crime) {
         database.crimeDao().deleteCrime(crime)
     }
 

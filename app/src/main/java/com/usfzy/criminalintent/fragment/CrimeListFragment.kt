@@ -81,7 +81,7 @@ class CrimeListFragment : Fragment(), MenuProvider {
                 title = "",
                 date = Date(),
                 isSolved = false,
-                requiresPolice = false,
+                suspect = "",
             )
 
             crimeListViewModel.addCrime(crime)
@@ -91,6 +91,7 @@ class CrimeListFragment : Fragment(), MenuProvider {
         }
 
     }
+
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.fragment_crime_list, menu)
     }
