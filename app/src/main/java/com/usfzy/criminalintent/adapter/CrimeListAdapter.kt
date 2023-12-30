@@ -28,7 +28,7 @@ class CrimeHolder(private val binding: ListItemCrimeBinding) :
                 onDeleteCrimeClicked(crime)
             }
 
-            imageView.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
+            crimePhoto.visibility = if (crime.isSolved) View.VISIBLE else View.GONE
         }
     }
 }

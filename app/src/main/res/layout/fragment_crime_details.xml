@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,13 +13,25 @@
         android:text="@string/crime_title_label"
         android:textAppearance="?attr/textAppearanceHeadline5" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/crime_title"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/crime_title_hint"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/crime_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/crime_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/crime_title_hint"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
