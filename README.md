@@ -7,4 +7,5 @@ Fragment result listener,
 migrations for room,
 implicit intent and chooser intent
 capture image from camera,
-content provider,file provider
+content provider,file provider,
+localization
